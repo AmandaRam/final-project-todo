@@ -3,16 +3,31 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
+import {
+    setupKinde,
+    protectRoute,
+    getUser,
+} from "@kinde-oss/kinde-node-express";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
+
+const kindeConfig = {
+    clientId: process.env.KINDE_CLIENT_ID,
+    issuerBaseUrl: process.env.KINDE_ISSUER_URL,
+    siteUrl: process.env.KINDE_SITE_URL,
+    secret: process.env.KINDE_CLIENT_SECRET,
+    redirectUrl: process.env.KINDE_POST_LOGOUT_REDIRECT_URL,
+};
 
 // Defines the port the app will run on. Defaults to 8080, but can be overridden
 // when starting the server. Example command to overwrite PORT env variable value:
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+
+setupKinde(kindeConfig, app);
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -21,6 +36,10 @@ app.use(express.json());
 // Documents my API
 app.get("/", (_, res) => {
     res.json(listEndpoints(app));
+});
+
+app.get("/secret", protectRoute, getUser, (req, res) => {
+    res.json({ user: req.user });
 });
 
 // Start the server
