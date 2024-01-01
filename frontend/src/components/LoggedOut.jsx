@@ -22,7 +22,7 @@ export default function LoggedOut() {
         <div className="container">
           <div className="card hero">
             <p className="text-display-1 hero-title">
-              Let's start authenticating <br /> with KindeAuth
+              Lets start authenticating <br /> with KindeAuth
             </p>
             <p className="text-body-1 hero-tagline">Configure your app</p>
 

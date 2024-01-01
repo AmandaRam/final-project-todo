@@ -10,3 +10,4 @@ Documentation:
 - Deployed both backend and frontend on Vercel.
 - Installed Kinde for authentication.
 - Added log in / log out functionality.
+- Installed Prettier for code formatting and lint.s
