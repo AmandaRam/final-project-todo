@@ -61,4 +61,33 @@ listRoutes.delete("/lists/:id", verifier, async (req, res) => {
   }
 });
 
+// This route will edit a list
+listRoutes.put("/lists/:id", verifier, async (req, res) => {
+  try {
+    // Get user from database
+    const user = await getUser(req.user.id);
+
+    // Find the list with the specified id
+    const index = user.lists.findIndex(
+      (list) => list._id.toString() === req.params.id,
+    );
+    // If the list exists, update the list by finding the list with the specified id
+    if (index > -1) {
+      // Update the list's name
+      user.lists[index].name = req.body.name;
+      await user.save();
+
+      // Respond with the updated list
+      res.status(200).json(user.lists[index]);
+      // If the list does not exist, respond with a 404 error
+    } else {
+      res.status(404).json({ message: "List not found" });
+    }
+    // If something goes wrong, respond with a 500 error
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Could not edit list" });
+  }
+});
+
 export default listRoutes;
