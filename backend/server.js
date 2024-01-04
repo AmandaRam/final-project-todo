@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 import { jwtVerify } from "@kinde-oss/kinde-node-express";
+import userRoutes from "./routes/UserRoutes";
 
 const verifier = jwtVerify(process.env.KINDE_DOMAIN);
 
@@ -21,13 +22,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(userRoutes);
+
 // Documents my API
 app.get("/", (_, res) => {
   res.json(listEndpoints(app));
-});
-
-app.get("/secret", verifier, (req, res) => {
-  res.json({ user: req.user });
 });
 
 // Start the server

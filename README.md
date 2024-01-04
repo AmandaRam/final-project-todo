@@ -11,3 +11,13 @@ Documentation:
 - Installed Kinde for authentication.
 - Added log in / log out functionality.
 - Installed Prettier for code formatting and lint.s
+- Created user, list and todo schemas.
+
+Routes:
+- GET /profile
+
+- POST & GET /lists
+- GET & PUT & DELETE /lists/id
+
+- POST & GET /todos
+- GET & PUT & DELETE /todos/id
