@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 import { jwtVerify } from "@kinde-oss/kinde-node-express";
 import userRoutes from "./routes/UserRoutes";
+import listRoutes from "./routes/ListRoutes";
 
 const verifier = jwtVerify(process.env.KINDE_DOMAIN);
 
@@ -22,7 +23,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Using my defined routes
 app.use(userRoutes);
+app.use(listRoutes);
 
 // Documents my API
 app.get("/", (_, res) => {

@@ -5,14 +5,6 @@
 4. Frontend - set up functionality.
 5. Design app and Kinde.
 
-Documentation:
-- Set up structure with boiler plate code.
-- Deployed both backend and frontend on Vercel.
-- Installed Kinde for authentication.
-- Added log in / log out functionality.
-- Installed Prettier for code formatting and lint.s
-- Created user, list and todo schemas.
-
 Routes:
 - GET /profile
 
@@ -21,3 +13,14 @@ Routes:
 
 - POST & GET /todos
 - GET & PUT & DELETE /todos/id
+
+Documentation:
+- Set up structure with boiler plate code.
+- Deployed both backend and frontend on Vercel.
+- Installed Kinde for authentication.
+- Added log in / log out functionality.
+- Installed Prettier for code formatting and lint.s
+- Created user, list and todo schemas.
+- Defined UserRoutes.js
+- Defined ListRoutes.js
+
