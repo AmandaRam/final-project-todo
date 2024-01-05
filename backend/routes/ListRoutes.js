@@ -1,7 +1,7 @@
 import express from "express";
-import verifier from "../middlewares/verifier";
-import User from "../models/User";
 import getUser from "../services/getUser";
+import verifier from "../middlewares/verifier";
+import listNameValidator from "../middlewares/listNameValidator";
 
 const listRoutes = express.Router();
 
@@ -24,12 +24,34 @@ listRoutes.get("/lists", verifier, async (req, res) => {
   }
 });
 
+// This route will get a specific list
+listRoutes.get("/lists/:id", verifier, async (req, res) => {
+  try {
+    // Get user from database
+    const user = await getUser(req.user.id);
+    // Finding the list with the specified id
+    const list = user.lists.find(
+      (list) => list._id.toString() === req.params.id,
+    );
+    // If the list does not exist, respond with a 404 errors
+    if (list === undefined) {
+      res.status(404).json({ message: "List not found" });
+    } else {
+      res.status(200).json(list);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Could not fetch list" });
+  }
+});
+
 // This route will create a new list
-listRoutes.post("/lists", verifier, async (req, res) => {
+listRoutes.post("/lists", verifier, listNameValidator, async (req, res) => {
   try {
     // Get user from database
     const user = await getUser(req.user.id);
     const name = req.body.name;
+
     // Add a new list to the user's lists array
     user.lists.push({ name });
     await user.save();
@@ -62,7 +84,7 @@ listRoutes.delete("/lists/:id", verifier, async (req, res) => {
 });
 
 // This route will edit a list
-listRoutes.put("/lists/:id", verifier, async (req, res) => {
+listRoutes.put("/lists/:id", verifier, listNameValidator, async (req, res) => {
   try {
     // Get user from database
     const user = await getUser(req.user.id);

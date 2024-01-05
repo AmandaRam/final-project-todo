@@ -22,5 +22,6 @@ Documentation:
 - Installed Prettier for code formatting and lint.s
 - Created user, list and todo schemas.
 - Defined UserRoutes.js
-- Defined ListRoutes.js (GET and POST)
+- Defined ListRoutes.js (GET, POST, PUT & DELETE)
+- Defined TodoRoutes.js (GET, POST, PUT & DELETE)
 

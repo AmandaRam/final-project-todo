@@ -6,6 +6,7 @@ import listEndpoints from "express-list-endpoints";
 import { jwtVerify } from "@kinde-oss/kinde-node-express";
 import userRoutes from "./routes/UserRoutes";
 import listRoutes from "./routes/ListRoutes";
+import todoRoutes from "./routes/Todoroutes";
 
 const verifier = jwtVerify(process.env.KINDE_DOMAIN);
 
@@ -26,6 +27,7 @@ app.use(express.json());
 // Using my defined routes
 app.use(userRoutes);
 app.use(listRoutes);
+app.use(todoRoutes);
 
 // Documents my API
 app.get("/", (_, res) => {
