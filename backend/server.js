@@ -3,12 +3,9 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
-import { jwtVerify } from "@kinde-oss/kinde-node-express";
 import userRoutes from "./routes/UserRoutes";
 import listRoutes from "./routes/ListRoutes";
 import todoRoutes from "./routes/Todoroutes";
-
-const verifier = jwtVerify(process.env.KINDE_DOMAIN);
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
