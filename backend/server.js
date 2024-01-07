@@ -2,6 +2,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
+import { jwtVerify } from "@kinde-oss/kinde-node-express";
 import listEndpoints from "express-list-endpoints";
 import userRoutes from "./routes/UserRoutes";
 import listRoutes from "./routes/ListRoutes";
