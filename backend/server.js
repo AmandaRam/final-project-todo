@@ -1,7 +1,7 @@
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 import listEndpoints from "express-list-endpoints";
 import userRoutes from "./routes/UserRoutes";
 import listRoutes from "./routes/ListRoutes";
@@ -31,9 +31,7 @@ app.get("/", (_, res) => {
   res.json(listEndpoints(app));
 });
 
-// // Start the server
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
-
-module.exports = app;
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
