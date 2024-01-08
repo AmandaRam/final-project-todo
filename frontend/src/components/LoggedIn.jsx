@@ -1,69 +1,62 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import { useEffect } from "react";
+import {
+  Text,
+  Card,
+  Group,
+  Avatar,
+  Burger,
+  Button,
+  AppShell,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconChartBubble, IconLogout } from "@tabler/icons-react";
 
 export default function LoggedIn() {
-  const { user, logout, getToken } = useKindeAuth();
-
-  useEffect(() => {
-    const test = async () => {
-      const token = await getToken();
-      const response = await fetch(import.meta.env.VITE_API_URL + "/secret", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-      } else {
-        console.error("Failed to fetch data from API");
-      }
-    };
-
-    test();
-  }, []);
+  const { user, logout } = useKindeAuth();
+  const [opened, { toggle }] = useDisclosure();
 
   return (
-    <>
-      <header>
-        <nav className="nav container">
-          <h1 className="text-display-3">KindeAuth</h1>
-          <div className="profile-blob">
-            {user.picture !== "" ? (
-              <img
-                className="avatar"
-                src={user.picture}
-                alt="user profile avatar"
-              />
-            ) : (
-              <div className="avatar">
-                {user?.given_name?.[0]}
-                {user?.family_name?.[1]}
+    <AppShell
+      header={{ height: 60 }}
+      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      padding="md"
+    >
+      <AppShell.Header>
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <IconChartBubble size={30} />
+            <Text size="lg" fw="bold">
+              Listify
+            </Text>
+          </Group>
+          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        </Group>
+      </AppShell.Header>
+      <AppShell.Navbar p="md">
+        <AppShell.Section grow></AppShell.Section>
+        <AppShell.Section>
+          <Card>
+            <Group mb="md">
+              <Avatar radius="xl" src={user.picture} />
+              <div>
+                <Text>{user.given_name}</Text>
+                <Text size="xs" c="dimmed">
+                  {user.email}
+                </Text>
               </div>
-            )}
-            <div>
-              <p className="text-heading-2">
-                {user?.given_name} {user?.family_name}
-              </p>
-              <button className="text-subtle" onClick={logout}>
-                Sign out
-              </button>
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      <main>
-        <div className="container">
-          <div className="card start-hero">
-            <p className="text-body-2 start-hero-intro">Woohoo!</p>
-            <p className="text-display-2">
-              Your authentication is all sorted.
-              <br />
-              Build the important stuff.
-            </p>
-          </div>
-        </div>
-      </main>
-    </>
+            </Group>
+            <Button
+              size="sm"
+              variant="light"
+              onClick={logout}
+              rightSection={<IconLogout size={16} />}
+            >
+              Logout
+            </Button>
+          </Card>
+        </AppShell.Section>
+      </AppShell.Navbar>
+      <AppShell.Main>Main</AppShell.Main>
+    </AppShell>
   );
 }

@@ -1,58 +1,38 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import {
+  AppShell,
+  Button,
+  Card,
+  Center,
+  Group,
+  Text,
+  Title,
+} from "@mantine/core";
 
 export default function LoggedOut() {
   const { login, register } = useKindeAuth();
   return (
-    <>
-      <header>
-        <nav className="nav container">
-          <h1 className="text-display-3">KindeAuth</h1>
-          <div>
-            <button className="btn btn-ghost sign-in-btn" onClick={login}>
-              Sign in
-            </button>
-            <button className="btn btn-dark" onClick={register}>
-              Sign up
-            </button>
-          </div>
-        </nav>
-      </header>
-
-      <main>
-        <div className="container">
-          <div className="card hero">
-            <p className="text-display-1 hero-title">
-              Lets start authenticating <br /> with KindeAuth
-            </p>
-            <p className="text-body-1 hero-tagline">Configure your app</p>
-
-            <a
-              href="https://kinde.com/docs/developer-tools/react-sdk"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-light btn-big"
-            >
-              Go to docs
-            </a>
-          </div>
-        </div>
-      </main>
-
-      <footer className="footer">
-        <div className="container">
-          <strong className="text-heading-2">KindeAuth</strong>
-          <p className="footer-tagline text-body-3">
-            Visit our{" "}
-            <a className="link" href="https://kinde.com/docs">
-              help center
-            </a>
-          </p>
-
-          <small className="text-subtle">
-            © 2023 KindeAuth, Inc. All rights reserved
-          </small>
-        </div>
-      </footer>
-    </>
+    <AppShell>
+      <AppShell.Main>
+        <Center h="100vh">
+          <Card w="300px">
+            <Title order={3}>Listify</Title>
+            <Text mb="md">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+              voluptatum, voluptatibus, quisquam, quos voluptas quia
+              exercitationem quibusdam eaque quod dolorum atque? Quisquam
+              voluptatum, voluptatibus, quisquam, quos voluptas quia
+              exercitationem quibusdam eaque quod dolorum atque?
+            </Text>
+            <Group grow>
+              <Button onClick={login}>Login</Button>
+              <Button variant="light" onClick={register}>
+                Register
+              </Button>
+            </Group>
+          </Card>
+        </Center>
+      </AppShell.Main>
+    </AppShell>
   );
 }

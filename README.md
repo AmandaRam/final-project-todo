@@ -24,4 +24,7 @@ Documentation:
 - Defined UserRoutes.js
 - Defined ListRoutes.js (GET, POST, PUT & DELETE)
 - Defined TodoRoutes.js (GET, POST, PUT & DELETE)
+- Started with Frontend
+- Installed Mantine
+- Designed landing page & logged in page
 

@@ -4,7 +4,10 @@ import Layout from "./components/Layout";
 
 export default function App() {
   return (
-    <MantineProvider>
+    <MantineProvider
+      defaultColorScheme="dark"
+      theme={{ primaryColor: "violet" }}
+    >
       <Layout />
     </MantineProvider>
   );
