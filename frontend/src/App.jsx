@@ -1,11 +1,11 @@
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import LoggedIn from "./components/LoggedIn";
-import LoggedOut from "./components/LoggedOut";
+import "@mantine/core/styles.css";
+import { MantineProvider } from "@mantine/core";
+import Layout from "./components/Layout";
 
 export default function App() {
-  const { isLoading, isAuthenticated } = useKindeAuth();
-
-  if (isLoading) return <>Loading...</>;
-
-  return isAuthenticated ? <LoggedIn /> : <LoggedOut />;
+  return (
+    <MantineProvider>
+      <Layout />
+    </MantineProvider>
+  );
 }
