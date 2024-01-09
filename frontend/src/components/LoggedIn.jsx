@@ -9,9 +9,15 @@ import {
   AppShell,
   LoadingOverlay,
   NavLink,
+  Divider,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconChartBubble, IconLogout } from "@tabler/icons-react";
+import {
+  IconChartBubble,
+  IconList,
+  IconLogout,
+  IconPlus,
+} from "@tabler/icons-react";
 import useListStore from "../hooks/useListStore";
 import { useEffect, useState } from "react";
 
@@ -87,8 +93,20 @@ export default function LoggedIn() {
       <AppShell.Navbar p="md">
         <AppShell.Section grow>
           {lists.map((list) => (
-            <NavLink href="" label={list.name} key={list._id} />
+            <NavLink
+              href=""
+              label={list.name}
+              key={list._id}
+              leftSection={<IconList size={16} />}
+            />
           ))}
+          <Divider my="md" />
+          <NavLink
+            href=""
+            active
+            label="Add new list"
+            leftSection={<IconPlus size={16} />}
+          />
         </AppShell.Section>
         <AppShell.Section>
           <Card>
