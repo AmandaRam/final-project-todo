@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import App from "./App.jsx";
+import { MantineProvider } from "@mantine/core";
+import LogInProvider from "./providers/LogInProvider.jsx";
+import ListProvider from "./providers/ListProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -12,7 +15,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       redirectUri={import.meta.env.VITE_KINDE_REDIRECT_URL}
       isDangerouslyUseLocalStorage={import.meta.env.DEV}
     >
-      <App />
+      <MantineProvider
+        defaultColorScheme="dark"
+        theme={{ primaryColor: "violet" }}
+      >
+        {/*  We are using the LoginProvider to only show the app if we are logged in */}
+        <LogInProvider>
+          {/*  We are using the ListProvider to load our lists */}
+          <ListProvider>
+            <App />
+          </ListProvider>
+        </LogInProvider>
+      </MantineProvider>
     </KindeProvider>
   </React.StrictMode>,
 );

@@ -1,16 +1,88 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import LoggedIn from "./LoggedIn";
-import LoggedOut from "./LoggedOut";
-import { LoadingOverlay } from "@mantine/core";
+import {
+  Text,
+  Card,
+  Group,
+  Avatar,
+  Burger,
+  Button,
+  NavLink,
+  Divider,
+  AppShell,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  IconList,
+  IconPlus,
+  IconLogout,
+  IconChartBubble,
+} from "@tabler/icons-react";
+import useListStore from "../hooks/useListStore";
 
 export default function Layout() {
-  const { isLoading, isAuthenticated } = useKindeAuth();
+  const { user, logout } = useKindeAuth();
+  const [opened, { toggle }] = useDisclosure();
 
-  if (isLoading) {
-    return (
-      <LoadingOverlay visible zIndex={1000} loaderProps={{ type: "dots" }} />
-    );
-  }
+  const lists = useListStore((state) => state.lists);
 
-  return isAuthenticated ? <LoggedIn /> : <LoggedOut />;
+  return (
+    <AppShell
+      header={{ height: 60 }}
+      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      padding="md"
+    >
+      <AppShell.Header>
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <IconChartBubble size={30} />
+            <Text size="lg" fw="bold">
+              Listify
+            </Text>
+          </Group>
+          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        </Group>
+      </AppShell.Header>
+      <AppShell.Navbar p="md">
+        <AppShell.Section grow>
+          {lists.map((list) => (
+            <NavLink
+              href=""
+              label={list.name}
+              key={list._id}
+              leftSection={<IconList size={16} />}
+            />
+          ))}
+          <Divider my="md" />
+          <NavLink
+            href=""
+            active
+            label="Add new list"
+            leftSection={<IconPlus size={16} />}
+          />
+        </AppShell.Section>
+        <AppShell.Section>
+          <Card>
+            <Group mb="md">
+              <Avatar radius="xl" src={user.picture} />
+              <div>
+                <Text>{user.given_name}</Text>
+                <Text size="xs" c="dimmed">
+                  {user.email}
+                </Text>
+              </div>
+            </Group>
+            <Button
+              size="sm"
+              variant="light"
+              onClick={logout}
+              rightSection={<IconLogout size={16} />}
+            >
+              Logout
+            </Button>
+          </Card>
+        </AppShell.Section>
+      </AppShell.Navbar>
+      <AppShell.Main>Main</AppShell.Main>
+    </AppShell>
+  );
 }

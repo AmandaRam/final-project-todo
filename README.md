@@ -31,4 +31,5 @@ Documentation:
 - Installed Zustand
 - API fetching
 - Mapped up lists and displayed them
-
+- Added some styling to lists
+- Restructured the code and split it up into different providers
