@@ -18,6 +18,7 @@ import {
   IconChartBubble,
 } from "@tabler/icons-react";
 import useListStore from "../hooks/useListStore";
+import { Link, Outlet } from "react-router-dom";
 
 export default function Layout() {
   const { user, logout } = useKindeAuth();
@@ -46,7 +47,8 @@ export default function Layout() {
         <AppShell.Section grow>
           {lists.map((list) => (
             <NavLink
-              href=""
+              to={`/lists/${list._id}`}
+              component={Link}
               label={list.name}
               key={list._id}
               leftSection={<IconList size={16} />}
@@ -82,7 +84,9 @@ export default function Layout() {
           </Card>
         </AppShell.Section>
       </AppShell.Navbar>
-      <AppShell.Main>Main</AppShell.Main>
+      <AppShell.Main>
+        <Outlet />
+      </AppShell.Main>
     </AppShell>
   );
 }

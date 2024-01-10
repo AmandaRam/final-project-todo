@@ -33,3 +33,5 @@ Documentation:
 - Mapped up lists and displayed them
 - Added some styling to lists
 - Restructured the code and split it up into different providers
+- Installed react-router-dom
+- Mapping up lists and todos

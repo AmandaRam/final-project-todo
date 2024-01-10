@@ -1,10 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
-import App from "./App.jsx";
 import { MantineProvider } from "@mantine/core";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./components/Layout.jsx";
 import LogInProvider from "./providers/LogInProvider.jsx";
 import ListProvider from "./providers/ListProvider.jsx";
+import List from "./pages/List.jsx";
+import "@mantine/core/styles.css";
+
+// We are using the createBrowserRouter function to display our routes
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <h1>Home</h1>,
+      },
+      {
+        path: "/lists/:listId",
+        element: <List />,
+      },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -23,7 +44,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <LogInProvider>
           {/*  We are using the ListProvider to load our lists */}
           <ListProvider>
-            <App />
+            <RouterProvider router={router} />
           </ListProvider>
         </LogInProvider>
       </MantineProvider>
