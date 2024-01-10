@@ -35,3 +35,4 @@ Documentation:
 - Restructured the code and split it up into different providers
 - Installed react-router-dom
 - Mapping up lists and todos
+- Styled todos
