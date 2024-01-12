@@ -1,6 +1,7 @@
-import { Card, Checkbox, Group, SimpleGrid, Text } from "@mantine/core";
+import { SimpleGrid } from "@mantine/core";
 import { useParams } from "react-router-dom";
-import useListStore from "../hooks/useListStore";
+import useListStore from "../../hooks/useListStore";
+import Todo from "../../components/Todo/Todo";
 
 const List = () => {
   // We are using the useParams hook to get the listId from the URL
@@ -14,14 +15,9 @@ const List = () => {
   // We are using the map method to render all the todos in the list
   return (
     <>
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }}>
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }}>
         {todos.map((todo) => (
-          <Card key={todo._id}>
-            <Group>
-              <Checkbox radius="xl" />
-              <Text>{todo.text}</Text>
-            </Group>
-          </Card>
+          <Todo key={todo._id} todo={todo} />
         ))}
       </SimpleGrid>
     </>

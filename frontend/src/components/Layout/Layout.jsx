@@ -17,7 +17,7 @@ import {
   IconLogout,
   IconChartBubble,
 } from "@tabler/icons-react";
-import useListStore from "../hooks/useListStore";
+import useListStore from "../../hooks/useListStore";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Layout() {

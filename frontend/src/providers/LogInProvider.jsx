@@ -1,6 +1,6 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { LoadingOverlay } from "@mantine/core";
-import LoggedOut from "../components/LoggedOut";
+import LoggedOut from "../components/Auth/LoggedOut";
 
 export default function LogInProvider({ children }) {
   const { isLoading, isAuthenticated } = useKindeAuth();

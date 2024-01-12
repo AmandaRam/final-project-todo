@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import { MantineProvider } from "@mantine/core";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/Layout.jsx";
+import Layout from "./components/Layout/Layout.jsx";
 import LogInProvider from "./providers/LogInProvider.jsx";
 import ListProvider from "./providers/ListProvider.jsx";
-import List from "./pages/List.jsx";
+import List from "./pages/List/List.jsx";
 import "@mantine/core/styles.css";
 
 // We are using the createBrowserRouter function to display our routes
@@ -38,7 +38,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
       <MantineProvider
         defaultColorScheme="dark"
-        theme={{ primaryColor: "violet" }}
+        theme={{ primaryColor: "violet", cursorType: "pointer" }}
       >
         {/*  We are using the LoginProvider to only show the app if we are logged in */}
         <LogInProvider>
