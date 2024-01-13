@@ -36,4 +36,6 @@ Documentation:
 - Installed react-router-dom
 - Mapping up lists and todos
 - Styled todos
-- Restructured and started  working on editing todo
+- Restructured and made editing on the todos
+- Made the logic to add, edit and remove for both todos and lists
+- 

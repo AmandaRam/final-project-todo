@@ -1,8 +1,8 @@
+import { useState } from "react";
+import { IconTrash } from "@tabler/icons-react";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { ActionIcon, Card, Checkbox, Group, TextInput } from "@mantine/core";
-import { IconTrash } from "@tabler/icons-react";
 import styles from "./Todo.module.css";
-import { useState } from "react";
 
 // When User presses the delete button, the following will happen:
 // 1. The remove function is called with the todo id
@@ -29,13 +29,36 @@ const Todo = ({ todo }) => {
   const { getToken } = useKindeAuth();
 
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const [todoText, setTodoText] = useState(todo.text);
   const [todoCompleted, setTodoCompleted] = useState(todo.completed);
 
-  const editTodoText = async () => {};
+  const editTodo = async (text, completed) => {
+    try {
+      setIsEditing(true);
 
-  const toggleTodo = async () => {};
+      const token = await getToken();
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/todos/${todo._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ text, completed }),
+        },
+      );
+      if (response.status === 200) {
+        // Update todo in Zustand store
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsEditing(false);
+    }
+  };
 
   const removeTodo = async () => {
     try {
@@ -67,13 +90,24 @@ const Todo = ({ todo }) => {
     <Card key={todo._id}>
       <Group wrap="nowrap" justify="space-between">
         <Group wrap="nowrap">
-          <Checkbox radius="xl" classNames={{ input: styles.input }} />
+          <Checkbox
+            radius="xl"
+            disabled={isEditing}
+            checked={todoCompleted}
+            onChange={(e) => {
+              setTodoCompleted(e.target.checked);
+              editTodo(todoText, e.target.checked);
+            }}
+            classNames={{ input: styles.input }}
+          />
           <TextInput
             size="md"
             value={todoText}
+            disabled={isEditing}
             variant="unstyled"
             placeholder="Clean the house"
             onChange={(e) => setTodoText(e.target.value)}
+            onBlur={() => editTodo(todoText, todoCompleted)}
           />
         </Group>
         <ActionIcon

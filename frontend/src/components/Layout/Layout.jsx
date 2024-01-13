@@ -7,7 +7,6 @@ import {
   Burger,
   Button,
   NavLink,
-  Divider,
   AppShell,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -28,9 +27,9 @@ export default function Layout() {
 
   return (
     <AppShell
+      padding="md"
       header={{ height: 60 }}
       navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      padding="md"
     >
       <AppShell.Header>
         <Group h="100%" px="md" justify="space-between">
@@ -54,7 +53,6 @@ export default function Layout() {
               leftSection={<IconList size={16} />}
             />
           ))}
-          <Divider my="md" />
           <NavLink
             href=""
             active
