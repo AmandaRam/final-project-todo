@@ -12,7 +12,11 @@ const List = () => {
   const lists = useListStore((state) => state.lists);
   // We are using the find method to find the list with the same id as the one in the URL
   const list = lists.find((list) => list._id === listId);
+
   const { getToken } = useKindeAuth();
+
+  const editList = useListStore((state) => state.editList);
+  const deleteList = useListStore((state) => state.deleteList);
 
   const [listName, setListName] = useState(list.name);
   useEffect(() => setListName(list.name), [list.name]);
@@ -20,7 +24,7 @@ const List = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const editList = async () => {
+  const handleEdit = async () => {
     try {
       setIsEditing(true);
 
@@ -36,8 +40,9 @@ const List = () => {
           body: JSON.stringify({ name: listName }),
         },
       );
-      if (response.status === 200) {
-        // Update todo in Zustand store
+      if (response.ok) {
+        const editedList = await response.json();
+        editList(list._id, editedList);
       }
     } catch (error) {
       console.error(error);
@@ -46,7 +51,7 @@ const List = () => {
     }
   };
 
-  const removeList = async () => {
+  const handleDelete = async () => {
     try {
       setIsDeleting(true);
 
@@ -62,8 +67,8 @@ const List = () => {
         },
       );
 
-      if (response.status === 204) {
-        // Remove todo from Zustand store
+      if (response.ok) {
+        deleteList(list._id);
       }
     } catch (error) {
       console.error(error);
@@ -84,13 +89,13 @@ const List = () => {
           onChange={(e) => setListName(e.target.value)}
           placeholder="List name"
           aria-label="List name"
-          onBlur={editList}
+          onBlur={handleEdit}
           disabled={isEditing}
         />
         <Button
           size="xs"
           variant="light"
-          onClick={removeList}
+          onClick={handleDelete}
           disabled={isDeleting}
           loading={isDeleting}
         >

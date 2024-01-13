@@ -12,8 +12,8 @@ const useListStore = create((set) => ({
     set((state) => ({
       lists: [...state.lists.filter((l) => l._id !== listId), editedList],
     })),
-  // Remove list by taking the current state and removing the list with the same id
-  removeList: (listId) =>
+  // Delete list by taking the current state and removing the list with the same id
+  deleteList: (listId) =>
     set((state) => ({
       lists: state.lists.filter((l) => l._id !== listId),
     })),
@@ -39,8 +39,8 @@ const useListStore = create((set) => ({
 
       return { lists: updatedLists };
     }),
-  // Remove the todo by filtering out all todos with the id we want to remove
-  removeTodo: (todoId) =>
+  // Delete the todo by filtering out all todos with the id we want to delete
+  deleteTodo: (todoId) =>
     set((state) => {
       const updatedLists = state.lists.map((list) => ({
         ...list,
