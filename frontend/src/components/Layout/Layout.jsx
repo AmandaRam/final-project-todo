@@ -8,6 +8,8 @@ import {
   Button,
   NavLink,
   AppShell,
+  Indicator,
+  Divider,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -17,13 +19,54 @@ import {
   IconChartBubble,
 } from "@tabler/icons-react";
 import useListStore from "../../hooks/useListStore";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Layout() {
-  const { user, logout } = useKindeAuth();
-  const [opened, { toggle }] = useDisclosure();
+  const { user, logout, getToken } = useKindeAuth();
+  const [opened, { toggle, close }] = useDisclosure();
 
+  // We are using the useNavigate hook to navigate to the list page after creating a new list
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // We are using the useListStore hook to get the lists and addList function from the Zustand store
   const lists = useListStore((state) => state.lists);
+  const addList = useListStore((state) => state.addList);
+
+  // We are using useState to tell that we are making an API call to the backend when adding a new list
+  const [isAdding, setIsAdding] = useState(false);
+
+  // When user presses the add new list button, the following will happen:
+  const handleAddList = async () => {
+    try {
+      setIsAdding(true);
+
+      // Get token from Kinde Auth React hook
+      const token = await getToken();
+      // Make a POST request to the backend to add a new list
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/lists`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name: "Untitled list" }),
+      });
+
+      if (response.ok) {
+        // If the response is ok, then we will add the new list to our Zustand store and navigate to the list page
+        const addedList = await response.json();
+        addList(addedList);
+        navigate(`/lists/${addedList._id}`);
+        close();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <AppShell
@@ -46,16 +89,27 @@ export default function Layout() {
         <AppShell.Section grow>
           {lists.map((list) => (
             <NavLink
+              key={list._id}
               to={`/lists/${list._id}`}
+              onClick={close}
               component={Link}
               label={list.name}
-              key={list._id}
               leftSection={<IconList size={16} />}
+              rightSection={
+                <Indicator
+                  // We are using the disabled prop to disable the indicator when the user is not on the list page
+                  disabled={location.pathname !== `/lists/${list._id}`}
+                />
+              }
             />
           ))}
+          <Divider my="md" />
           <NavLink
-            href=""
             active
+            component={Button}
+            onClick={handleAddList}
+            loading={isAdding}
+            disabled={isAdding}
             label="Add new list"
             leftSection={<IconPlus size={16} />}
           />

@@ -38,4 +38,4 @@ Documentation:
 - Styled todos
 - Restructured and made editing on the todos
 - Made the logic to add, edit and remove for both todos and lists
-- 
+- Logic for adding a new list and sync the backend with the frontend representation
