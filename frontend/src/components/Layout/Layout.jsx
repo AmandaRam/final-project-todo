@@ -87,6 +87,11 @@ export default function Layout() {
       </AppShell.Header>
       <AppShell.Navbar p="md">
         <AppShell.Section grow>
+          {lists.length === 0 && (
+            <Text size="sm" c="dimmed">
+              Add your first list
+            </Text>
+          )}
           {lists.map((list) => (
             <NavLink
               key={list._id}

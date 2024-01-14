@@ -33,7 +33,7 @@ const EditList = ({ list }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ name: listName }),
+          body: JSON.stringify({ name: listName || "Untitled list" }),
         },
       );
       // If the response is ok, then we will update the list in our Zustand store
