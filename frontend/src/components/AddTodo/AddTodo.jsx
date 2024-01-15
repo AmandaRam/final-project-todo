@@ -3,6 +3,7 @@ import useListStore from "../../hooks/useListStore";
 import { useState } from "react";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { IconPlus } from "@tabler/icons-react";
+import { notifications } from "@mantine/notifications";
 
 // Component to add a new todo
 const AddTodo = ({ listId }) => {
@@ -40,9 +41,16 @@ const AddTodo = ({ listId }) => {
         const addedTodo = await response.json();
         addTodo(listId, addedTodo);
         setText("");
+      } else {
+        throw new Error("Something went wrong");
       }
     } catch (error) {
       console.error(error);
+      notifications.show({
+        title: "Error!",
+        color: "red",
+        message: "Could not add todo ... 🤥",
+      });
     } finally {
       setIsAdding(false);
     }

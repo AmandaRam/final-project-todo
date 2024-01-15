@@ -4,6 +4,7 @@ import Todo from "../../components/Todo/Todo";
 import { useEffect, useState } from "react";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import AddTodo from "../AddTodo/AddTodo";
+import { notifications } from "@mantine/notifications";
 
 const EditList = ({ list }) => {
   const { getToken } = useKindeAuth();
@@ -41,9 +42,16 @@ const EditList = ({ list }) => {
       if (response.ok) {
         const editedList = await response.json();
         editList(list._id, editedList);
+      } else {
+        throw new Error("Something went wrong");
       }
     } catch (error) {
       console.error(error);
+      notifications.show({
+        title: "Error!",
+        color: "red",
+        message: "Could not edit list ... 🤥",
+      });
     } finally {
       setIsEditing(false);
     }
@@ -68,9 +76,16 @@ const EditList = ({ list }) => {
       // If the response is ok, then we will delete the list from our Zustand store
       if (response.ok) {
         deleteList(list._id);
+      } else {
+        throw new Error("Something went wrong");
       }
     } catch (error) {
       console.error(error);
+      notifications.show({
+        title: "Error!",
+        color: "red",
+        message: "Could not delete list ... 🤥",
+      });
     } finally {
       setIsDeleting(false);
     }

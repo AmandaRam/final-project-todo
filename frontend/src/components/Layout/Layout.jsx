@@ -21,6 +21,7 @@ import {
 import useListStore from "../../hooks/useListStore";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { notifications } from "@mantine/notifications";
 
 export default function Layout() {
   const { user, logout, getToken } = useKindeAuth();
@@ -60,9 +61,16 @@ export default function Layout() {
         addList(addedList);
         navigate(`/lists/${addedList._id}`);
         close();
+      } else {
+        throw new Error("Something went wrong");
       }
     } catch (error) {
       console.error(error);
+      notifications.show({
+        title: "Error!",
+        color: "red",
+        message: "Could not add list ... 🤥",
+      });
     } finally {
       setIsAdding(false);
     }

@@ -8,6 +8,8 @@ import LogInProvider from "./providers/LogInProvider.jsx";
 import ListProvider from "./providers/ListProvider.jsx";
 import List from "./pages/List/List.jsx";
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
+import { Notifications } from "@mantine/notifications";
 
 // We are using the createBrowserRouter function to display our routes
 const router = createBrowserRouter([
@@ -40,6 +42,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         defaultColorScheme="dark"
         theme={{ primaryColor: "violet", cursorType: "pointer" }}
       >
+        <Notifications />
         {/*  We are using the LoginProvider to only show the app if we are logged in */}
         <LogInProvider>
           {/*  We are using the ListProvider to load our lists */}

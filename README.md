@@ -40,4 +40,6 @@ Documentation:
 - Made the logic to add, edit and remove for both todos and lists
 - Logic for adding a new list and sync the backend with the frontend representation
 - Logic to add todo
-- Added styling
+- Added some styling to AddTodo component
+- Installed Mantine Notifications
+- Added error handling

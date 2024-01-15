@@ -4,6 +4,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { ActionIcon, Card, Checkbox, Group, TextInput } from "@mantine/core";
 import styles from "./Todo.module.css";
 import useListStore from "../../hooks/useListStore";
+import { notifications } from "@mantine/notifications";
 
 const Todo = ({ todo }) => {
   const { getToken } = useKindeAuth();
@@ -42,9 +43,16 @@ const Todo = ({ todo }) => {
       if (response.ok) {
         const editedTodo = await response.json();
         editTodo(todo._id, editedTodo);
+      } else {
+        throw new Error("Something went wrong");
       }
     } catch (error) {
       console.error(error);
+      notifications.show({
+        title: "Error!",
+        color: "red",
+        message: "Could not edit todo ... 🤥",
+      });
     } finally {
       setIsEditing(false);
     }
@@ -72,9 +80,16 @@ const Todo = ({ todo }) => {
       // If the response is ok, then we will delete the todo from our Zustand store
       if (response.ok) {
         deleteTodo(todo._id);
+      } else {
+        throw new Error("Something went wrong");
       }
     } catch (error) {
       console.error(error);
+      notifications.show({
+        title: "Error!",
+        color: "red",
+        message: "Could not delete todo ... 🤥",
+      });
     } finally {
       setIsDeleting(false);
     }

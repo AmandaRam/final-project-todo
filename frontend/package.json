@@ -13,6 +13,7 @@
     "@kinde-oss/kinde-auth-react": "^3.0.23",
     "@mantine/core": "^7.4.0",
     "@mantine/hooks": "^7.4.0",
+    "@mantine/notifications": "^7.4.1",
     "@tabler/icons-react": "^2.45.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
