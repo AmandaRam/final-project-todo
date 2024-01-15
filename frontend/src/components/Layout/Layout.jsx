@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   Text,
   Card,
@@ -6,10 +8,10 @@ import {
   Avatar,
   Burger,
   Button,
+  Divider,
   NavLink,
   AppShell,
   Indicator,
-  Divider,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -19,8 +21,6 @@ import {
   IconChartBubble,
 } from "@tabler/icons-react";
 import useListStore from "../../hooks/useListStore";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { notifications } from "@mantine/notifications";
 
 export default function Layout() {

@@ -4,7 +4,6 @@ import express from "express";
 import mongoose from "mongoose";
 import { jwtVerify } from "@kinde-oss/kinde-node-express";
 import listEndpoints from "express-list-endpoints";
-import userRoutes from "./routes/UserRoutes";
 import listRoutes from "./routes/ListRoutes";
 import todoRoutes from "./routes/Todoroutes";
 
@@ -23,7 +22,6 @@ app.use(cors());
 app.use(express.json());
 
 // Using my defined routes
-app.use(userRoutes);
 app.use(listRoutes);
 app.use(todoRoutes);
 

@@ -5,7 +5,7 @@ import { LoadingOverlay } from "@mantine/core";
 
 // This provider is used to load the lists from the backend
 export default function ListProvider({ children }) {
-  const { getToken } = useKindeAuth();
+  const { getToken, logout } = useKindeAuth();
 
   // State for loading user data and lists
   const [isLoading, setIsLoading] = useState(true);
@@ -20,14 +20,11 @@ export default function ListProvider({ children }) {
         // Getting our token from the Kinde
         const token = await getToken();
         // Fetching our lists from the backend using the Kinde token
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/profile`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/lists`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         // If the response is not ok, force an error and catch it
         if (!response.ok) {

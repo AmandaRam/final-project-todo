@@ -1,12 +1,12 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import {
-  AppShell,
-  Button,
   Card,
-  Center,
-  Group,
   Text,
   Title,
+  Group,
+  Button,
+  Center,
+  AppShell,
 } from "@mantine/core";
 
 export default function LoggedOut() {

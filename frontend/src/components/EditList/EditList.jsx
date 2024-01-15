@@ -1,10 +1,10 @@
-import { Button, Divider, Group, SimpleGrid, TextInput } from "@mantine/core";
-import useListStore from "../../hooks/useListStore";
-import Todo from "../../components/Todo/Todo";
 import { useEffect, useState } from "react";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import AddTodo from "../AddTodo/AddTodo";
 import { notifications } from "@mantine/notifications";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import { Button, Divider, Group, SimpleGrid, TextInput } from "@mantine/core";
+import AddTodo from "../AddTodo/AddTodo";
+import Todo from "../../components/Todo/Todo";
+import useListStore from "../../hooks/useListStore";
 
 const EditList = ({ list }) => {
   const { getToken } = useKindeAuth();

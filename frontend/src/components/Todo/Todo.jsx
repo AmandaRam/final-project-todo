@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { IconTrash } from "@tabler/icons-react";
+import { notifications } from "@mantine/notifications";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { ActionIcon, Card, Checkbox, Group, TextInput } from "@mantine/core";
-import styles from "./Todo.module.css";
 import useListStore from "../../hooks/useListStore";
-import { notifications } from "@mantine/notifications";
+import styles from "./Todo.module.css";
 
 const Todo = ({ todo }) => {
   const { getToken } = useKindeAuth();
@@ -39,6 +39,7 @@ const Todo = ({ todo }) => {
           body: JSON.stringify({ text, completed }),
         },
       );
+
       // If the response is ok, then we will update the todo in our Zustand store
       if (response.ok) {
         const editedTodo = await response.json();
@@ -48,6 +49,11 @@ const Todo = ({ todo }) => {
       }
     } catch (error) {
       console.error(error);
+
+      // If the API call fails, then we will reset the todo text and completed state to the original values
+      setTodoText(todo.text);
+      setTodoCompleted(todo.completed);
+
       notifications.show({
         title: "Error!",
         color: "red",
