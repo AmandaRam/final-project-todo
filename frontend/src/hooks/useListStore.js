@@ -44,7 +44,7 @@ const useListStore = create((set) => ({
     set((state) => {
       const updatedLists = state.lists.map((list) => ({
         ...list,
-        todos: list.todos.filter((oldTodo) => oldTodo.todoId !== todoId),
+        todos: list.todos.filter((oldTodo) => oldTodo._id !== todoId),
       }));
 
       return { lists: updatedLists };

@@ -7,7 +7,7 @@ import useListStore from "../../hooks/useListStore";
 
 const Todo = ({ todo }) => {
   const { getToken } = useKindeAuth();
-  // We are using the useListStore hook to get the editTodo and deleteTodo functions from the Zustand store
+  // We are using the useListStore hook to get the editTodo and removeTodo functions from the Zustand store
   const editTodo = useListStore((state) => state.editTodo);
   const deleteTodo = useListStore((state) => state.deleteTodo);
 

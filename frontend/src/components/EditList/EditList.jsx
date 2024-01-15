@@ -3,6 +3,7 @@ import useListStore from "../../hooks/useListStore";
 import Todo from "../../components/Todo/Todo";
 import { useEffect, useState } from "react";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import AddTodo from "../AddTodo/AddTodo";
 
 const EditList = ({ list }) => {
   const { getToken } = useKindeAuth();
@@ -100,7 +101,8 @@ const EditList = ({ list }) => {
         </Button>
       </Group>
       <Divider mb="md" />
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }}>
+      <AddTodo listId={list._id} />
+      <SimpleGrid mt="md" cols={{ base: 1, sm: 2, lg: 3 }}>
         {list.todos.map((todo) => (
           <Todo key={todo._id} todo={todo} />
         ))}
