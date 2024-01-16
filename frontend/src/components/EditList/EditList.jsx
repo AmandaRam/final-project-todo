@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import {
@@ -32,6 +33,8 @@ const EditList = ({ list }) => {
 
   // API call to backend to edit the list
   const handleEdit = async () => {
+    if (listName === list.name) return;
+
     try {
       setIsEditing(true);
       // We are getting the token from the Kinde Auth React hook
@@ -100,11 +103,27 @@ const EditList = ({ list }) => {
     }
   };
 
+  const confirmDelete = () =>
+    modals.openConfirmModal({
+      title: "Delete your list",
+      centered: true,
+      children: (
+        <Text size="sm">
+          Are you sure you want to delete your list? This action cannot be
+          reversed.
+        </Text>
+      ),
+      labels: { confirm: "Delete list", cancel: "No don't delete it" },
+      confirmProps: { color: "red" },
+      onConfirm: handleDelete,
+    });
+
   return (
     <>
       <Group justify="space-between">
         <TextInput
-          size="xl"
+          autoFocus
+          size="lg"
           variant="unstyled"
           value={listName}
           onChange={(e) => setListName(e.target.value)}
@@ -114,12 +133,12 @@ const EditList = ({ list }) => {
           disabled={isEditing}
         />
         <ActionIcon
-          mr="md"
+          size="lg"
           color="red"
           variant="light"
           loading={isDeleting}
           disabled={isDeleting}
-          onClick={handleDelete}
+          onClick={confirmDelete}
         >
           <IconTrash size={16} />
         </ActionIcon>

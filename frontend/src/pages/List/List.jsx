@@ -1,4 +1,4 @@
-import { Alert, Text, Title } from "@mantine/core";
+import { Alert } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import useListStore from "../../hooks/useListStore";
 import EditList from "../../components/EditList/EditList";

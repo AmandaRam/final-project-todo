@@ -12,13 +12,14 @@ import {
   NavLink,
   AppShell,
   Indicator,
+  ThemeIcon,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconList,
   IconPlus,
   IconLogout,
-  IconChartBubble,
+  IconHeartCheck,
 } from "@tabler/icons-react";
 import useListStore from "../../hooks/useListStore";
 import { notifications } from "@mantine/notifications";
@@ -85,10 +86,10 @@ export default function Layout() {
       <AppShell.Header>
         <Group h="100%" px="md" justify="space-between">
           <Group>
-            <IconChartBubble size={30} />
-            <Text size="lg" fw="bold">
-              Listify
-            </Text>
+            <ThemeIcon variant="transparent">
+              <IconHeartCheck size={25} stroke={1.5} />
+            </ThemeIcon>
+            <Text size="xl">Listify</Text>
           </Group>
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         </Group>

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { ModalsProvider } from "@mantine/modals";
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import List from "./pages/List/List.jsx";
@@ -44,12 +45,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       >
         <Notifications />
         {/*  We are using the LoginProvider to only show the app if we are logged in */}
-        <LogInProvider>
-          {/*  We are using the ListProvider to load our lists */}
-          <ListProvider>
-            <RouterProvider router={router} />
-          </ListProvider>
-        </LogInProvider>
+        <ModalsProvider>
+          <LogInProvider>
+            {/*  We are using the ListProvider to load our lists */}
+            <ListProvider>
+              <RouterProvider router={router} />
+            </ListProvider>
+          </LogInProvider>
+        </ModalsProvider>
       </MantineProvider>
     </KindeProvider>
   </React.StrictMode>,
