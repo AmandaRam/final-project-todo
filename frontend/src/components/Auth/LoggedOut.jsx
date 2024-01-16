@@ -15,7 +15,7 @@ export default function LoggedOut() {
     <AppShell>
       <AppShell.Main>
         <Center h="100vh">
-          <Card w="300px">
+          <Card shadow="md" w="300px">
             <Title order={3}>Listify</Title>
             <Text mb="md">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas

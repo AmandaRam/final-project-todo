@@ -102,7 +102,7 @@ const Todo = ({ todo }) => {
   };
 
   return (
-    <Card key={todo._id}>
+    <Card key={todo._id} shadow="md">
       <Group wrap="nowrap" justify="space-between">
         <Group wrap="nowrap">
           <Checkbox

@@ -13,6 +13,9 @@ import {
   AppShell,
   Indicator,
   ThemeIcon,
+  useMantineColorScheme,
+  useComputedColorScheme,
+  ActionIcon,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -20,6 +23,8 @@ import {
   IconPlus,
   IconLogout,
   IconHeartCheck,
+  IconSun,
+  IconMoon,
 } from "@tabler/icons-react";
 import useListStore from "../../hooks/useListStore";
 import { notifications } from "@mantine/notifications";
@@ -27,6 +32,11 @@ import { notifications } from "@mantine/notifications";
 export default function Layout() {
   const { user, logout, getToken } = useKindeAuth();
   const [opened, { toggle, close }] = useDisclosure();
+
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
 
   // We are using the useNavigate hook to navigate to the list page after creating a new list
   const navigate = useNavigate();
@@ -91,7 +101,27 @@ export default function Layout() {
             </ThemeIcon>
             <Text size="xl">Listify</Text>
           </Group>
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Group>
+            <ActionIcon
+              onClick={() =>
+                setColorScheme(
+                  computedColorScheme === "light" ? "dark" : "light",
+                )
+              }
+              size="md"
+              variant="transparent"
+              aria-label="Toggle color scheme"
+            >
+              {computedColorScheme === "light" && <IconMoon stroke={1.5} />}
+              {computedColorScheme === "dark" && <IconSun stroke={1.5} />}
+            </ActionIcon>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="sm"
+              size="sm"
+            />
+          </Group>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
@@ -129,7 +159,7 @@ export default function Layout() {
           />
         </AppShell.Section>
         <AppShell.Section>
-          <Card>
+          <Card shadow="md">
             <Group mb="md">
               <Avatar radius="xl" src={user.picture} />
               <div>

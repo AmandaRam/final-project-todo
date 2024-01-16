@@ -59,7 +59,7 @@ const AddTodo = ({ listId }) => {
 
   return (
     <SimpleGrid cols={{ base: 1, md: 2, lg: 3 }}>
-      <Card>
+      <Card shadow="md">
         <TextInput
           size="md"
           flex="auto"

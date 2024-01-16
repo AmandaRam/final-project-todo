@@ -44,3 +44,6 @@ Documentation:
 - Installed Mantine Notifications
 - Added error handling
 - Added logic to filter out todos and put them in a completed section & error handling
+- Did some styling
+- Added modals manager for confirmation dialoges.
+- Added dark mode toggle
