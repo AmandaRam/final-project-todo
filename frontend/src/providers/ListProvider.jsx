@@ -52,7 +52,7 @@ const ListProvider = ({ children }) => {
     );
   }
 
-  if (!hasError) {
+  if (hasError) {
     return <Error />;
   }
 
