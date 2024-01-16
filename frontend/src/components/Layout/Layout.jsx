@@ -29,7 +29,7 @@ import {
 import useListStore from "../../hooks/useListStore";
 import { notifications } from "@mantine/notifications";
 
-export default function Layout() {
+const Layout = () => {
   const { user, logout, getToken } = useKindeAuth();
   const [opened, { toggle, close }] = useDisclosure();
 
@@ -87,6 +87,10 @@ export default function Layout() {
     }
   };
 
+  const sortedLists = [...lists].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+  );
+
   return (
     <AppShell
       padding="md"
@@ -126,12 +130,12 @@ export default function Layout() {
       </AppShell.Header>
       <AppShell.Navbar p="md">
         <AppShell.Section grow>
-          {lists.length === 0 && (
+          {sortedLists.length === 0 && (
             <Text size="sm" c="dimmed">
               Add your first list
             </Text>
           )}
-          {lists.map((list) => (
+          {sortedLists.map((list) => (
             <NavLink
               key={list._id}
               to={`/lists/${list._id}`}
@@ -185,4 +189,6 @@ export default function Layout() {
       </AppShell.Main>
     </AppShell>
   );
-}
+};
+
+export default Layout;

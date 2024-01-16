@@ -2,10 +2,11 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { useEffect, useState } from "react";
 import useListStore from "../hooks/useListStore";
 import { LoadingOverlay } from "@mantine/core";
+import Error from "../pages/Error/Error";
 
 // This provider is used to load the lists from the backend
-export default function ListProvider({ children }) {
-  const { getToken, logout } = useKindeAuth();
+const ListProvider = ({ children }) => {
+  const { getToken } = useKindeAuth();
 
   // State for loading user data and lists
   const [isLoading, setIsLoading] = useState(true);
@@ -51,5 +52,11 @@ export default function ListProvider({ children }) {
     );
   }
 
+  if (!hasError) {
+    return <Error />;
+  }
+
   return children;
-}
+};
+
+export default ListProvider;

@@ -6,6 +6,7 @@ import { ModalsProvider } from "@mantine/modals";
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import List from "./pages/List/List.jsx";
+import Error from "./pages/Error/Error.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import ListProvider from "./providers/ListProvider.jsx";
 import LogInProvider from "./providers/LogInProvider.jsx";
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",

@@ -22,6 +22,8 @@ const Todo = ({ todo }) => {
 
   // When User edits the todo text, the following will happen:
   const handleEdit = async (text, completed) => {
+    if (text === todo.text && completed === todo.completed) return;
+
     try {
       setIsEditing(true);
 

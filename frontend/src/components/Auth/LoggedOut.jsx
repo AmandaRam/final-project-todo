@@ -9,7 +9,7 @@ import {
   AppShell,
 } from "@mantine/core";
 
-export default function LoggedOut() {
+const LoggedOut = () => {
   const { login, register } = useKindeAuth();
   return (
     <AppShell>
@@ -29,4 +29,6 @@ export default function LoggedOut() {
       </AppShell.Main>
     </AppShell>
   );
-}
+};
+
+export default LoggedOut;
