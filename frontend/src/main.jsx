@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
+import { Notifications } from "@mantine/notifications";
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home/Home.jsx";
 import List from "./pages/List/List.jsx";
 import Error from "./pages/Error/Error.jsx";
 import Layout from "./components/Layout/Layout.jsx";
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Home</h1>,
+        element: <Home />,
       },
       {
         path: "/lists/:listId",

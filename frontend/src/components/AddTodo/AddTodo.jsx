@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { IconPlus } from "@tabler/icons-react";
+import { getHotkeyHandler } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { Card, TextInput, SimpleGrid, ActionIcon } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
 import useListStore from "../../hooks/useListStore";
-import { getHotkeyHandler } from "@mantine/hooks";
 
 // Component to add a new todo
 const AddTodo = ({ listId }) => {

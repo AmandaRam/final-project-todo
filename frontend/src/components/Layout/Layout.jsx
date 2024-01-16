@@ -13,18 +13,18 @@ import {
   AppShell,
   Indicator,
   ThemeIcon,
+  ActionIcon,
   useMantineColorScheme,
   useComputedColorScheme,
-  ActionIcon,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
-  IconList,
-  IconPlus,
-  IconLogout,
-  IconHeartCheck,
   IconSun,
   IconMoon,
+  IconPlus,
+  IconList,
+  IconLogout,
+  IconHeartCheck,
 } from "@tabler/icons-react";
 import useListStore from "../../hooks/useListStore";
 import { notifications } from "@mantine/notifications";

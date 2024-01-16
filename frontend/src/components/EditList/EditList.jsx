@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
+import { IconTrash } from "@tabler/icons-react";
 import { notifications } from "@mantine/notifications";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import {
-  Accordion,
-  ActionIcon,
   Text,
-  Divider,
   Group,
-  SimpleGrid,
+  Divider,
+  Accordion,
   TextInput,
+  ActionIcon,
+  SimpleGrid,
 } from "@mantine/core";
-import AddTodo from "../AddTodo/AddTodo";
 import Todo from "../../components/Todo/Todo";
+import AddTodo from "../AddTodo/AddTodo";
 import useListStore from "../../hooks/useListStore";
-import { IconTrash } from "@tabler/icons-react";
 
 const EditList = ({ list }) => {
   const { getToken } = useKindeAuth();

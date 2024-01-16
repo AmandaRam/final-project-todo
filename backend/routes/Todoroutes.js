@@ -1,6 +1,6 @@
 import express from "express";
-import verifier from "../middlewares/verifier";
 import getUser from "../services/getUser";
+import verifier from "../middlewares/verifier";
 
 const todoRoutes = express.Router();
 

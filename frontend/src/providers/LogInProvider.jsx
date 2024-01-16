@@ -1,5 +1,5 @@
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { LoadingOverlay } from "@mantine/core";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import LoggedOut from "../components/Auth/LoggedOut";
 
 const LogInProvider = ({ children }) => {
