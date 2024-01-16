@@ -1,4 +1,4 @@
-import { Text, Title } from "@mantine/core";
+import { Alert, Text, Title } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import useListStore from "../../hooks/useListStore";
 import EditList from "../../components/EditList/EditList";
@@ -13,10 +13,10 @@ const List = () => {
 
   if (!list) {
     return (
-      <>
-        <Title>List not found</Title>
-        <Text>The list you were looking for does not exist.</Text>
-      </>
+      <Alert variant="light" color="violet" title="List not found">
+        The list might have been recently deleted or you might have typed in the
+        wrong URL.
+      </Alert>
     );
   }
 

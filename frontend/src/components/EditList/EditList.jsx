@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import { Button, Divider, Group, SimpleGrid, TextInput } from "@mantine/core";
+import {
+  Accordion,
+  ActionIcon,
+  Text,
+  Divider,
+  Group,
+  SimpleGrid,
+  TextInput,
+} from "@mantine/core";
 import AddTodo from "../AddTodo/AddTodo";
 import Todo from "../../components/Todo/Todo";
 import useListStore from "../../hooks/useListStore";
+import { IconTrash } from "@tabler/icons-react";
 
 const EditList = ({ list }) => {
   const { getToken } = useKindeAuth();
@@ -104,24 +113,51 @@ const EditList = ({ list }) => {
           onBlur={handleEdit}
           disabled={isEditing}
         />
-        <Button
-          size="xs"
-          variant="light"
+        <ActionIcon
+          mr="md"
           color="red"
-          onClick={handleDelete}
-          disabled={isDeleting}
+          variant="light"
           loading={isDeleting}
+          disabled={isDeleting}
+          onClick={handleDelete}
         >
-          Delete list
-        </Button>
+          <IconTrash size={16} />
+        </ActionIcon>
       </Group>
       <Divider mb="md" />
       <AddTodo listId={list._id} />
-      <SimpleGrid mt="md" cols={{ base: 1, sm: 2, lg: 3 }}>
-        {list.todos.map((todo) => (
-          <Todo key={todo._id} todo={todo} />
-        ))}
+      {/* If there are no todos we will display below text */}
+      {list.todos.filter((todo) => !todo.completed).length === 0 && (
+        <Text c="dimmed" mt="md">
+          You have no active todos, HURRAY!
+        </Text>
+      )}
+      <SimpleGrid my="md" cols={{ base: 1, sm: 2, lg: 3 }}>
+        {list.todos
+          // Filter out completed todos
+          .filter((todo) => !todo.completed)
+          .map((todo) => (
+            <Todo key={todo._id} todo={todo} />
+          ))}
       </SimpleGrid>
+      {/* Show the completed tab only if there are completed todos */}
+      {list.todos.filter((todo) => todo.completed).length > 0 && (
+        <Accordion mb="md" styles={{ content: { padding: 0 } }}>
+          <Accordion.Item value="completed">
+            <Accordion.Control>Completed</Accordion.Control>
+            <Accordion.Panel>
+              <SimpleGrid mt="md" cols={{ base: 1, sm: 2, lg: 3 }}>
+                {list.todos
+                  // Show completed todos
+                  .filter((todo) => todo.completed)
+                  .map((todo) => (
+                    <Todo key={todo._id} todo={todo} />
+                  ))}
+              </SimpleGrid>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+      )}
     </>
   );
 };

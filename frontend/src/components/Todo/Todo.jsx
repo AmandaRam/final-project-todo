@@ -116,6 +116,7 @@ const Todo = ({ todo }) => {
             classNames={{ input: styles.input }}
           />
           <TextInput
+            td={todoCompleted ? "line-through" : "none"}
             size="md"
             value={todoText}
             disabled={isEditing}

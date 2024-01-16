@@ -43,3 +43,4 @@ Documentation:
 - Added some styling to AddTodo component
 - Installed Mantine Notifications
 - Added error handling
+- Added logic to filter out todos and put them in a completed section & error handling

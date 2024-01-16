@@ -4,6 +4,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { Card, TextInput, SimpleGrid, ActionIcon } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import useListStore from "../../hooks/useListStore";
+import { getHotkeyHandler } from "@mantine/hooks";
 
 // Component to add a new todo
 const AddTodo = ({ listId }) => {
@@ -61,9 +62,11 @@ const AddTodo = ({ listId }) => {
       <Card>
         <TextInput
           size="md"
+          flex="auto"
           value={text}
           placeholder="What needs to be done?"
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={getHotkeyHandler([["Enter", handleAdd]])}
           rightSection={
             <ActionIcon
               variant="light"
