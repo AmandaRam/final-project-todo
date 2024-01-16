@@ -17,13 +17,7 @@ export default function LoggedOut() {
         <Center h="100vh">
           <Card shadow="md" w="300px">
             <Title order={3}>Listify</Title>
-            <Text mb="md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-              voluptatum, voluptatibus, quisquam, quos voluptas quia
-              exercitationem quibusdam eaque quod dolorum atque? Quisquam
-              voluptatum, voluptatibus, quisquam, quos voluptas quia
-              exercitationem quibusdam eaque quod dolorum atque?
-            </Text>
+            <Text mb="md">Welcome! Please login or register to continue.</Text>
             <Group grow>
               <Button onClick={login}>Login</Button>
               <Button variant="light" onClick={register}>
