@@ -67,6 +67,7 @@ listRoutes.delete("/lists/:id", verifier, async (req, res) => {
     user.lists = user.lists.filter(
       (list) => list._id.toString() !== req.params.id,
     );
+    // Save the user with the updated lists array
     await user.save();
     // Respond with a 204 status code with no content
     res.status(204).json();
