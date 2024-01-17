@@ -40,7 +40,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       domain={import.meta.env.VITE_KINDE_DOMAIN}
       logoutUri={import.meta.env.VITE_KINDE_LOGOUT_URL}
       redirectUri={import.meta.env.VITE_KINDE_REDIRECT_URL}
-      isDangerouslyUseLocalStorage={import.meta.env.DEV}
+      // We are using the isDangerouslyUseLocalStorage prop to store the token in localStorage. This is not recommended for production apps, but it was annoying to log in every time we refreshed the page when testing.
+      isDangerouslyUseLocalStorage={true}
     >
       <MantineProvider
         defaultColorScheme="dark"

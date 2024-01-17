@@ -103,7 +103,9 @@ const Layout = () => {
             <ThemeIcon variant="transparent">
               <IconHeartCheck size={25} stroke={1.5} />
             </ThemeIcon>
-            <Text size="xl">Listify</Text>
+            <Text size="xl" to="/" component={Link}>
+              Listify
+            </Text>
           </Group>
           <Group>
             <ActionIcon
