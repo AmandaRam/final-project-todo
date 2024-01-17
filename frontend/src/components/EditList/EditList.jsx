@@ -103,6 +103,7 @@ const EditList = ({ list }) => {
     }
   };
 
+  // When the user presses the delete button, we will show a confirm modal
   const confirmDelete = () =>
     modals.openConfirmModal({
       title: "Delete your list",
@@ -166,7 +167,7 @@ const EditList = ({ list }) => {
           ))}
       </SimpleGrid>
       {/* Show the completed tab only if there are completed todos */}
-      {list.todos.filter((todo) => todo.completed).length > 0 && (
+      {sortedTodos.filter((todo) => todo.completed).length > 0 && (
         <Accordion
           mb="md"
           variant="transparent"
@@ -176,7 +177,7 @@ const EditList = ({ list }) => {
             <Accordion.Control>Show completed</Accordion.Control>
             <Accordion.Panel>
               <SimpleGrid mt="md" cols={{ base: 1, sm: 2, lg: 3 }}>
-                {list.todos
+                {sortedTodos
                   // Show completed todos
                   .filter((todo) => todo.completed)
                   .map((todo) => (

@@ -87,6 +87,7 @@ const Layout = () => {
     }
   };
 
+  // We are sorting the lists by createdAt date
   const sortedLists = [...lists].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
   );
