@@ -126,6 +126,7 @@ const Layout = () => {
               onClick={toggle}
               hiddenFrom="sm"
               size="sm"
+              aria-label="Toggle menu"
             />
           </Group>
         </Group>
@@ -167,7 +168,11 @@ const Layout = () => {
         <AppShell.Section>
           <Card shadow="md">
             <Group mb="md">
-              <Avatar radius="xl" src={user.picture} />
+              <Avatar
+                alt="User profile picture"
+                radius="xl"
+                src={user.picture}
+              />
               <div>
                 <Text>{user.given_name}</Text>
                 <Text size="xs" c="dimmed">

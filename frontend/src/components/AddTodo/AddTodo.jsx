@@ -64,6 +64,7 @@ const AddTodo = ({ listId }) => {
           size="md"
           flex="auto"
           value={text}
+          aria-label="Todo description"
           placeholder="What needs to be done?"
           onChange={(e) => setText(e.target.value)}
           onKeyDown={getHotkeyHandler([["Enter", handleAdd]])}
@@ -73,6 +74,7 @@ const AddTodo = ({ listId }) => {
               disabled={isAdding || text === ""}
               loading={isAdding}
               onClick={handleAdd}
+              aria-label="Add todo"
             >
               <IconPlus size={16} />
             </ActionIcon>

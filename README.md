@@ -47,3 +47,5 @@ Documentation:
 - Did some styling
 - Added modals manager for confirmation dialoges.
 - Added dark mode toggle
+- Styled landing page
+- Fixed accessibility

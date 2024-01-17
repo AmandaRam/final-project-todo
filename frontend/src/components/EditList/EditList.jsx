@@ -144,6 +144,7 @@ const EditList = ({ list }) => {
           loading={isDeleting}
           disabled={isDeleting}
           onClick={confirmDelete}
+          aria-label="Delete list"
         >
           <IconTrash size={16} />
         </ActionIcon>

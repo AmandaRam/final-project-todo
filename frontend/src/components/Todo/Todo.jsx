@@ -111,6 +111,7 @@ const Todo = ({ todo }) => {
             radius="xl"
             disabled={isEditing}
             checked={todoCompleted}
+            aria-label="Todo completed"
             onChange={(e) => {
               setTodoCompleted(e.target.checked);
               handleEdit(todoText, e.target.checked);
@@ -126,11 +127,12 @@ const Todo = ({ todo }) => {
             placeholder="Clean the house"
             onChange={(e) => setTodoText(e.target.value)}
             onBlur={() => handleEdit(todoText, todoCompleted)}
+            aria-label="Todo description"
           />
         </Group>
         <ActionIcon
           variant="light"
-          aria-label="Delete"
+          aria-label="Delete todo"
           onClick={handleDelete}
           disabled={isDeleting}
         >
