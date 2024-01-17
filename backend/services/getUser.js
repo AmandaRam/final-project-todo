@@ -1,6 +1,6 @@
 import User from "../models/User";
 
-// This function will get a user from the database, or create a new user if the user does not exist
+// This function will get a user from the database, or create a new user if the user does not exist in the database
 const getUser = async (externalId) => {
   let user = await User.findOne({ externalId });
 
